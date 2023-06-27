@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import logging
 from datetime import datetime
 
@@ -9,7 +7,7 @@ from hexapod_remote.serial import Serial
 logger = logging.getLogger(__name__)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     serial = Serial()
     serial.wait_for_ping()
 
