@@ -1,0 +1,55 @@
+[tool.poetry]
+name = "hexapod-remote"
+version = "0.1.0"
+description = ""
+authors = ["h3nnn4n <git@renan.digital>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "hexapod_remote"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+python-decouple = "^3.8"
+pyserial = "^3.5"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.3.0"
+flake8 = "^6.0.0"
+flake8-bugbear = "^23.6.5"
+flake8-comprehensions = "^3.13.0"
+flake8-mutable = "^1.2.0"
+flake8-simplify = "^0.20.0"
+ipdb = "^0.13.13"
+ipython = "^8.14.0"
+isort = "^5.12.0"
+jedi = "^0.18.2"
+pre-commit = "^3.3.3"
+pyright = "^1.1.316"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 120
+target-version = ["py310"]
+
+[tool.isort]
+lines_after_imports=2
+atomic=true
+combine_star=true
+multi_line_output=3
+include_trailing_comma=true
+force_grid_wrap=0
+use_parentheses=true
+line_length=88
+profile="black"
+
+[tool.pyright]
+include = ["."]
+venv = ".venv"
+venvPath = "./"
+
+[tool.codespell]
+ignore-words = ".codespell_ignore"
