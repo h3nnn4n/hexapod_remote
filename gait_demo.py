@@ -16,22 +16,42 @@ def main():
     serial.send_command("ENABLE_SERVOS")
 
     serial.disable_auto_send()
+    for i in range(6):
+        serial.set_leg_position(i, 0, 100, -100)
+    serial.send_commands()
+
+    # serial.enable_auto_send()
+
+    # serial.set_leg_position(2, 50, 100, -140)
+
+    # serial.send_command("READ_LEG_INFO 2")
+
+    return
+
+    legs = [5, 3, 1]
+    # legs = [0, 3, 2, 5]
+    # legs = [0, 3]
 
     while True:
-        serial.set_leg_position(4, 0, 140, -120)
-        serial.set_leg_position(1, 0, 140, -120)
+        for leg in legs:
+            serial.set_leg_position(leg, -30, 100, -120)
         serial.send_commands()
-        # sleep(0.5)
+        sleep(0.25)
 
-        serial.set_leg_position(4, -50, 140, -140)
-        serial.set_leg_position(1, -50, 140, -140)
+        for leg in legs:
+            serial.set_leg_position(leg, 0, 100, -120)
         serial.send_commands()
-        # sleep(0.5)
+        sleep(0.25)
 
-        serial.set_leg_position(4, 50, 140, -140)
-        serial.set_leg_position(1, 50, 140, -140)
+        for leg in legs:
+            serial.set_leg_position(leg, 30, 100, -120)
         serial.send_commands()
-        # sleep(0.5)
+        sleep(0.25)
+
+        for leg in legs:
+            serial.set_leg_position(leg, 0, 100, -120)
+        serial.send_commands()
+        sleep(0.25)
 
 
 if __name__ == "__main__":
