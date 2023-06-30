@@ -28,6 +28,21 @@ class Serial:
         self._queue.clear()
         self._send_command(commands)
 
+    def set_leg_speed(self, leg_index: int, speed: float) -> None:
+        if leg_index not in range(6):
+            raise ValueError("leg_index must be in range(6)")
+
+        self.send_command(f"SET_LEG_SPEED {leg_index} {speed}")
+
+    def set_legs_speed(self, speed: float) -> None:
+        self.send_command(f"SET LEG_SPEED={speed}")
+
+    def set_leg_mode(self, mode: str) -> None:
+        if mode not in ["INSTANTANEOUS", "CONSTANT_SPEED"]:
+            raise ValueError(f"Invalid leg mode: {mode}")
+
+        self.send_command(f"SET MODE={mode}")
+
     def set_leg_angles(self, leg_index: int, coxa: float, femur: float, tibia: float) -> None:
         if leg_index not in range(6):
             raise ValueError("leg_index must be in range(6)")
