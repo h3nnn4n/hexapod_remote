@@ -64,6 +64,9 @@ class Serial:
         while True:
             line = self.readline()
 
+            if "ERROR" in line:
+                print(line)
+
             if line == "OK":
                 break
 
