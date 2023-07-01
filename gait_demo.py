@@ -26,7 +26,7 @@ def set_starting_position(serial: Serial) -> None:
     """
     serial.disable_auto_send()
     for i in range(6):
-        serial.set_leg_angles(i, 0, 90, 175)
+        serial.set_leg_angles(i, 0, 90, 162.5)
     serial.send_commands()
 
 
