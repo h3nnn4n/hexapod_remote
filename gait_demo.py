@@ -33,6 +33,7 @@ def set_starting_position(serial: Serial) -> None:
 def standup(serial: Serial, height: float = 100, n_steps: int = 15) -> None:
     serial.disable_auto_send()
 
+    distance_from_body = 120
     starting_height = 80
     step = (height - starting_height) / n_steps
 
@@ -41,7 +42,7 @@ def standup(serial: Serial, height: float = 100, n_steps: int = 15) -> None:
         h = round(h, 1)
 
         for leg_index in range(6):
-            serial.set_leg_position(leg_index, 0, 70, h)
+            serial.set_leg_position(leg_index, 0, distance_from_body, h)
 
         serial.send_commands()
 
@@ -201,6 +202,12 @@ def main(action: str) -> None:
 
         case "up_and_down":
             translate_body_up_and_down(serial)
+
+        case "standup":
+            standup(serial, 110)
+
+        case "standup_tall":
+            standup(serial, 225)
 
 
 if __name__ == "__main__":
