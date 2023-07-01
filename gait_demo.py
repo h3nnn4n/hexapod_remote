@@ -83,39 +83,42 @@ def main():
     serial.disable_auto_send()
 
     sleep_time = 1.5
-
     leg_group_1 = [0, 2, 4]
     leg_group_2 = [1, 3, 5]
+    ground_height = -140
+    feet_up_height = -100
+    distance_from_body = 60
+    stride_length = 35
 
     while True:
         # Part 1
         for leg in leg_group_1:
-            serial.set_leg_position(leg, -20, 60, -80)
+            serial.set_leg_position(leg, -stride_length, distance_from_body, feet_up_height)
 
         for leg in leg_group_2:
-            serial.set_leg_position(leg, 20, 60, -140)
+            serial.set_leg_position(leg, stride_length, distance_from_body, ground_height)
         serial.send_commands()
         sleep(sleep_time)
         print()
 
         for leg in leg_group_1:
-            serial.set_leg_position(leg, -20, 60, -140)
+            serial.set_leg_position(leg, -stride_length, distance_from_body, ground_height)
         serial.send_commands()
         sleep(sleep_time)
         print()
 
         # Part 2
         for leg in leg_group_2:
-            serial.set_leg_position(leg, 20, 60, -80)
+            serial.set_leg_position(leg, stride_length, distance_from_body, feet_up_height)
 
         for leg in leg_group_1:
-            serial.set_leg_position(leg, 20, 60, -140)
+            serial.set_leg_position(leg, stride_length, distance_from_body, ground_height)
         serial.send_commands()
         sleep(sleep_time)
         print()
 
         for leg in leg_group_2:
-            serial.set_leg_position(leg, -20, 60, -140)
+            serial.set_leg_position(leg, -stride_length, distance_from_body, ground_height)
         serial.send_commands()
         sleep(sleep_time)
         print()
