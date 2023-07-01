@@ -57,59 +57,56 @@ def set_height(serial: Serial, height: float = 100) -> None:
 def main():
     serial = connect()
 
+    sleep(2.5)
+
     serial.set_leg_mode("INSTANTANEOUS")
     set_height(serial, 140)
+    sleep(2.5)
 
     serial.enable_auto_send()
 
-    serial.set_legs_speed(5000.0)
+    serial.set_legs_speed(2500.0)
     serial.set_leg_mode("CONSTANT_SPEED")
 
     serial.disable_auto_send()
 
-    serial.set_leg_position(0, 0, 60, -80)
-    serial.set_leg_position(2, 0, 60, -80)
-    serial.set_leg_position(4, 0, 60, -80)
-    serial.send_commands()
-    sleep(2.5)
-    serial.set_leg_position(0, 0, 60, -140)
-    serial.set_leg_position(2, 0, 60, -140)
-    serial.set_leg_position(4, 0, 60, -140)
-    serial.send_commands()
-    sleep(2.5)
+    sleep_time = 1.5
 
-    serial.set_leg_position(1, 0, 60, -80)
-    serial.set_leg_position(3, 0, 60, -80)
-    serial.set_leg_position(5, 0, 60, -80)
-    serial.send_commands()
-    sleep(2.5)
-    serial.set_leg_position(1, 0, 60, -140)
-    serial.set_leg_position(3, 0, 60, -140)
-    serial.set_leg_position(5, 0, 60, -140)
-    serial.send_commands()
-    sleep(2.5)
+    leg_group_1 = [0, 2, 4]
+    leg_group_2 = [1, 3, 5]
 
-    # for i in range(6):
-    # print()
-    # serial.set_leg_position(i, 0, 60, -80)
-    # sleep(2.5)
-    # serial.set_leg_position(i, 0, 60, -140)
-    # sleep(2.5)
+    while True:
+        # Part 1
+        for leg in leg_group_1:
+            serial.set_leg_position(leg, -20, 60, -80)
 
-    # serial.set_leg_mode("INSTANTANEOUS")
-    # set_height(serial, 83.5)
+        for leg in leg_group_2:
+            serial.set_leg_position(leg, 20, 60, -140)
+        serial.send_commands()
+        sleep(sleep_time)
+        print()
 
-    # serial.set_legs_speed(100.0)
-    # serial.set_leg_mode("CONSTANT_SPEED")
-    # serial.send_commands()
+        for leg in leg_group_1:
+            serial.set_leg_position(leg, -20, 60, -140)
+        serial.send_commands()
+        sleep(sleep_time)
+        print()
 
-    # set_height(serial, 170)
+        # Part 2
+        for leg in leg_group_2:
+            serial.set_leg_position(leg, 20, 60, -80)
 
-    # set_height(serial, 70)
-    # set_height(serial, 170)
-    # while True:
-    # set_height(serial, 70)
-    # set_height(serial, 170)
+        for leg in leg_group_1:
+            serial.set_leg_position(leg, 20, 60, -140)
+        serial.send_commands()
+        sleep(sleep_time)
+        print()
+
+        for leg in leg_group_2:
+            serial.set_leg_position(leg, -20, 60, -140)
+        serial.send_commands()
+        sleep(sleep_time)
+        print()
 
 
 if __name__ == "__main__":
