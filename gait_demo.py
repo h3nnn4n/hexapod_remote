@@ -1,3 +1,4 @@
+import argparse
 from time import sleep
 
 from hexapod_remote.serial import Serial
@@ -58,8 +59,8 @@ def calibration_position(serial: Serial) -> None:
     serial.disable_auto_send()
 
     angle_coxa = 0
-    angle_femur = 90
-    angle_tibia = 162.5
+    angle_femur = 0
+    angle_tibia = 0
 
     for leg_index in range(6):
         serial.set_leg_angles(leg_index, angle_coxa, angle_femur, angle_tibia)
@@ -182,19 +183,29 @@ def walk_in_place(serial: Serial) -> None:
         print()
 
 
-def main():
+def main(action: str) -> None:
     serial = connect()
 
-    sleep(2.5)
-    serial.set_leg_mode("INSTANTANEOUS")
-    set_starting_position(serial)
-    set_height(serial, 110)
-    sleep(2.5)
+    match (action):
+        case "starting_position":
+            set_starting_position(serial)
 
-    # walk_in_place(serial)
-    # walk_forward(serial)
-    translate_body_up_and_down(serial)
+        case "calibration":
+            calibration_position(serial)
+
+        case "walk_in_place":
+            walk_in_place(serial)
+
+        case "walk_forward":
+            walk_forward(serial)
+
+        case "up_and_down":
+            translate_body_up_and_down(serial)
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Control the hexapod robot")
+    parser.add_argument("action", type=str, help="Action to perform")
+    args = parser.parse_args()
+
+    main(action=args.action)
