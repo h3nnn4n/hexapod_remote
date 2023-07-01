@@ -54,11 +54,23 @@ def set_height(serial: Serial, height: float = 100) -> None:
     serial.send_commands()
 
 
+def calibration_position(serial: Serial) -> None:
+    serial.disable_auto_send()
+
+    angle_coxa = 0
+    angle_femur = 90
+    angle_tibia = 162.5
+
+    for leg_index in range(6):
+        serial.set_leg_angles(leg_index, angle_coxa, angle_femur, angle_tibia)
+
+    serial.send_commands()
+
+
 def main():
     serial = connect()
 
     sleep(2.5)
-
     serial.set_leg_mode("INSTANTANEOUS")
     set_height(serial, 140)
     sleep(2.5)
