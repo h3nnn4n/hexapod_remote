@@ -66,14 +66,12 @@ def calibration_position(serial: Serial) -> None:
     serial.send_commands()
 
 
-def walk_forward(serial: Serial) -> None:
+def walk_forward(serial: Serial, stride_length: float = 50, distance_from_body: float = 95) -> None:
     leg_group_1 = [0, 2, 4]
     leg_group_2 = [1, 3, 5]
 
     ground_height = -120
     feet_up_height = -80
-    distance_from_body = 95
-    stride_length = 50
 
     walk_speed = 150
     sleep_time = 0.75
@@ -228,6 +226,9 @@ def main(action: str) -> None:
 
         case "walk_forward":
             walk_forward(serial)
+
+        case "walk_backward":
+            walk_forward(serial, stride_length=-50)
 
         case "up_and_down":
             translate_body_up_and_down(serial)
