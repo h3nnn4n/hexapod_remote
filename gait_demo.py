@@ -33,7 +33,7 @@ def set_starting_position(serial: Serial) -> None:
 
 def standup(serial: Serial, height: float = 100) -> None:
     serial.disable_auto_send()
-    serial.set_legs_speed(2500.0)
+    serial.set_legs_speed(50.0)
     serial.set_leg_mode("CONSTANT_SPEED")
 
     distance_from_body = 120
@@ -76,7 +76,7 @@ def walk_forward(serial: Serial) -> None:
     stride_length = 35
 
     serial.disable_auto_send()
-    serial.set_legs_speed(2500.0)
+    serial.set_legs_speed(50.0)
     serial.set_leg_mode("CONSTANT_SPEED")
     serial.send_commands()
 
@@ -115,13 +115,13 @@ def walk_forward(serial: Serial) -> None:
 
 
 def translate_body_up_and_down(serial: Serial) -> None:
-    sleep_time = 3.0
-    low_height = -175
-    high_height = -100
+    sleep_time = 2.0
+    low_height = -200
+    high_height = -80
     distance_from_body = 95
 
     serial.disable_auto_send()
-    serial.set_legs_speed(2500.0)
+    serial.set_legs_speed(50.0)
     serial.set_leg_mode("CONSTANT_SPEED")
     serial.send_commands()
 
@@ -149,7 +149,7 @@ def walk_in_place(serial: Serial) -> None:
     stride_length = 0
 
     serial.disable_auto_send()
-    serial.set_legs_speed(7500.0)
+    serial.set_legs_speed(50.0)
     serial.set_leg_mode("CONSTANT_SPEED")
     serial.send_commands()
 
