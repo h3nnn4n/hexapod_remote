@@ -36,7 +36,7 @@ def standup(serial: Serial, height: float = 100) -> None:
     serial.set_legs_speed(50.0)
     serial.set_leg_mode("CONSTANT_SPEED")
 
-    distance_from_body = 120
+    distance_from_body = 95
 
     for leg_index in range(6):
         serial.set_leg_position(leg_index, 0, distance_from_body, -height)
@@ -67,16 +67,19 @@ def calibration_position(serial: Serial) -> None:
 
 
 def walk_forward(serial: Serial) -> None:
-    sleep_time = 1.5
     leg_group_1 = [0, 2, 4]
     leg_group_2 = [1, 3, 5]
-    ground_height = -100
-    feet_up_height = -85
+
+    ground_height = -120
+    feet_up_height = -80
     distance_from_body = 95
-    stride_length = 35
+    stride_length = 50
+
+    walk_speed = 100
+    sleep_time = 1.0
 
     serial.disable_auto_send()
-    serial.set_legs_speed(50.0)
+    serial.set_legs_speed(walk_speed)
     serial.set_leg_mode("CONSTANT_SPEED")
     serial.send_commands()
 
@@ -115,9 +118,9 @@ def walk_forward(serial: Serial) -> None:
 
 
 def translate_body_up_and_down(serial: Serial) -> None:
-    sleep_time = 2.0
-    low_height = -200
-    high_height = -80
+    sleep_time = 3.0
+    low_height = -250
+    high_height = -75
     distance_from_body = 95
 
     serial.disable_auto_send()
@@ -140,16 +143,19 @@ def translate_body_up_and_down(serial: Serial) -> None:
 
 
 def walk_in_place(serial: Serial) -> None:
-    sleep_time = 0.75
     leg_group_1 = [0, 2, 4]
     leg_group_2 = [1, 3, 5]
-    ground_height = -100
+
+    ground_height = -120
     feet_up_height = -75
     distance_from_body = 95
     stride_length = 0
 
+    sleep_time = 0.75
+    walk_speed = 100
+
     serial.disable_auto_send()
-    serial.set_legs_speed(50.0)
+    serial.set_legs_speed(walk_speed)
     serial.set_leg_mode("CONSTANT_SPEED")
     serial.send_commands()
 
@@ -226,7 +232,7 @@ def main(action: str) -> None:
             translate_body_up_and_down(serial)
 
         case "standup":
-            standup(serial, 110)
+            standup(serial, 120)
 
         case "standup_tall":
             standup(serial, 225)
