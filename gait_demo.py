@@ -181,6 +181,31 @@ def walk_in_place(serial: Serial) -> None:
         print()
 
 
+def angle_offset_test(serial: Serial) -> None:
+    sleep_time = 1.0
+    height = -110
+
+    serial.set_legs_speed(50.0)
+    serial.set_leg_mode("CONSTANT_SPEED")
+
+    serial.disable_auto_send()
+
+    for _ in range(10):
+        for i in range(6):
+            serial.set_leg_position(i, 0, 80, height)
+        serial.send_commands()
+
+        print()
+        sleep(sleep_time)
+
+        for i in range(6):
+            serial.set_leg_position(i, 0, 120, height)
+        serial.send_commands()
+
+        print()
+        sleep(sleep_time)
+
+
 def main(action: str) -> None:
     serial = connect()
 
@@ -205,6 +230,9 @@ def main(action: str) -> None:
 
         case "standup_tall":
             standup(serial, 225)
+
+        case "angle_offset_test":
+            angle_offset_test(serial)
 
 
 if __name__ == "__main__":
