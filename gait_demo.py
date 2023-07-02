@@ -75,8 +75,9 @@ def walk_forward(serial: Serial) -> None:
     distance_from_body = 95
     stride_length = 50
 
-    walk_speed = 100
-    sleep_time = 1.0
+    walk_speed = 150
+    sleep_time = 0.75
+    sleep_time2 = 0.5
 
     serial.disable_auto_send()
     serial.set_legs_speed(walk_speed)
@@ -97,7 +98,7 @@ def walk_forward(serial: Serial) -> None:
         for leg in leg_group_1:
             serial.set_leg_position(leg, -stride_length, distance_from_body, ground_height)
         serial.send_commands()
-        sleep(sleep_time)
+        sleep(sleep_time2)
         print()
 
         # Part 2
@@ -113,7 +114,7 @@ def walk_forward(serial: Serial) -> None:
         for leg in leg_group_2:
             serial.set_leg_position(leg, -stride_length, distance_from_body, ground_height)
         serial.send_commands()
-        sleep(sleep_time)
+        sleep(sleep_time2)
         print()
 
 
