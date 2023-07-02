@@ -1,5 +1,6 @@
 import logging
 from datetime import datetime
+from time import sleep
 
 from hexapod_remote.serial import Serial
 
@@ -29,6 +30,13 @@ if __name__ == "__main__":
 
         for command in proccess_data(commands):
             t1 = datetime.now()
+
+            if command.startswith("SLEEP "):
+                _, _, sleep_time = command.partition(" ")
+                print(command)
+                sleep(float(sleep_time))
+                continue
+
             serial.write(command)
 
             t2 = datetime.now()
