@@ -7,26 +7,40 @@ from hexapod_remote.serial import Serial
 logger = logging.getLogger(__name__)
 
 
+def proccess_data(data: str) -> list[str]:
+    lines = data.splitlines()
+    lines = [line.strip() for line in lines]
+    lines = [line.partition("#")[0] for line in lines]
+    lines = [line for line in lines if line]
+    lines = [line + "\n" for line in lines]
+    return lines
+
+
 if __name__ == "__main__":
     serial = Serial()
     serial.wait_for_ping()
+    print("ready")
 
     while True:
-        command = input("> ")
-        t1 = datetime.now()
+        try:
+            commands = input()
+        except EOFError:
+            break
 
-        serial.write(command)
+        for command in proccess_data(commands):
+            t1 = datetime.now()
+            serial.write(command)
 
-        t2 = datetime.now()
-        logger.debug(f"Time to send: {t2 - t1}")
-
-        while True:
             t2 = datetime.now()
-            line = serial.readline()
-            t3 = datetime.now()
-            logger.debug(f"Time to receive: {t3 - t2}")
+            logger.debug(f"Time to send: {t2 - t1}")
 
-            if not line:
-                break
+            while True:
+                t2 = datetime.now()
+                line = serial.readline()
+                t3 = datetime.now()
+                logger.debug(f"Time to receive: {t3 - t2}")
 
-            print(line)
+                if not line:
+                    break
+
+                print(f"{line}")

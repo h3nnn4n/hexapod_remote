@@ -56,10 +56,14 @@ class Serial:
         self.send_command(f"SET_LEG_POSITION {leg_index} {x} {y} {z}")
 
     def send_command(self, command: str) -> None:
-        if not self._auto_send:
-            return self._queue.append(command)
+        actual_command, _, comments = command.partition("#")
+        if not actual_command:
+            return
 
-        self._send_command(command)
+        if not self._auto_send:
+            return self._queue.append(actual_command)
+
+        self._send_command(actual_command)
 
     def _send_command(self, command: str) -> None:
         print(command)
@@ -67,8 +71,8 @@ class Serial:
         self.wait_for_ok()
 
     def write(self, data: str) -> None:
-        if not data.endswith("\n"):
-            data += "\n"
+        data = data.strip()
+        data += "\n"
 
         self._port.write(data.encode())
 
