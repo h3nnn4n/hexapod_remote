@@ -25,26 +25,23 @@ def set_starting_position(serial: Serial) -> None:
     positions.
     """
     serial.disable_auto_send()
+    serial.set_leg_mode("INSTANTANEOUS")
     for i in range(6):
         serial.set_leg_angles(i, 0, 90, 162.5)
     serial.send_commands()
 
 
-def standup(serial: Serial, height: float = 100, n_steps: int = 15) -> None:
+def standup(serial: Serial, height: float = 100) -> None:
     serial.disable_auto_send()
+    serial.set_legs_speed(2500.0)
+    serial.set_leg_mode("CONSTANT_SPEED")
 
     distance_from_body = 120
-    starting_height = 80
-    step = (height - starting_height) / n_steps
 
-    for i in range(n_steps + 1):
-        h = 0.0 - (starting_height + i * step)
-        h = round(h, 1)
+    for leg_index in range(6):
+        serial.set_leg_position(leg_index, 0, distance_from_body, -height)
 
-        for leg_index in range(6):
-            serial.set_leg_position(leg_index, 0, distance_from_body, h)
-
-        serial.send_commands()
+    serial.send_commands()
 
 
 def set_height(serial: Serial, height: float = 100) -> None:
