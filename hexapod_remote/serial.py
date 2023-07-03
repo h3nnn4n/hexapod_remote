@@ -28,6 +28,12 @@ class Serial:
         self._queue.clear()
         self._send_command(commands)
 
+    def enable_servos(self) -> None:
+        self.send_command("ENABLE_SERVOS")
+
+    def disable_servos(self) -> None:
+        self.send_command("DISABLE_SERVOS")
+
     def set_leg_speed(self, leg_index: int, speed: float) -> None:
         if leg_index not in range(6):
             raise ValueError("leg_index must be in range(6)")
