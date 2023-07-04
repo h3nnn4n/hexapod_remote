@@ -35,12 +35,12 @@ class TripodGait(Gait):
 
         self.ground_height = -120.0
         self.feet_up_height = -75.0
-        self.distance_from_body = 95.0
-        self.stride_length = 40.0
+        self.distance_from_body = 115.0
+        self.stride_length = 35.0
 
         self.walk_speed = 150.0
-        self.sleep_time = 0.75
-        self.sleep_time2 = 0.5
+        self.sleep_time = 0.4
+        self.sleep_time2 = 0.4
 
     def walk(self, direction: float, distance: float) -> None:
         """Walk towards a `direction` for `distance` mm."""
