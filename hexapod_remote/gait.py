@@ -2,6 +2,7 @@ import logging
 from time import sleep
 
 from .serial import Serial
+from .vector import Vector
 
 
 logger = logging.getLogger(__name__)
@@ -33,7 +34,6 @@ class TripodGait(Gait):
 
     def walk(self, direction: float, distance: float) -> None:
         """Walk towards a `direction` for `distance` mm."""
-        # TODO: Rotate movement vectors based on `direction`
         # TODO: Adapt stride length based on `distance` to avoid doing one
         # extra step at the end
 
@@ -51,6 +51,12 @@ class TripodGait(Gait):
         distance_walked = 0.0
         steps_taken = 0
 
+        # convert from degrees to radians
+        angle = direction * 3.1415952654 / 180.0
+        walk_vector_pivot = Vector(0.0, distance_from_body)
+        walk_vector_start = Vector().from_angle(angle, stride_length) + walk_vector_pivot
+        walk_vector_end = Vector().from_angle(angle, -stride_length) + walk_vector_pivot
+
         serial.disable_auto_send()
         serial.set_legs_speed(self.walk_speed)
         serial.set_leg_mode("CONSTANT_SPEED")
@@ -65,30 +71,30 @@ class TripodGait(Gait):
 
             if steps_taken % 2 == 0:
                 for leg in self.leg_group_1:
-                    serial.set_leg_position(leg, 0, distance_from_body, feet_up_height)
+                    serial.set_leg_position(leg, walk_vector_pivot.x, walk_vector_pivot.y, feet_up_height)
 
                 for leg in self.leg_group_2:
-                    serial.set_leg_position(leg, stride_length, distance_from_body, ground_height)
+                    serial.set_leg_position(leg, walk_vector_start.x, walk_vector_start.y, ground_height)
                 serial.send_commands()
                 sleep(sleep_time)
 
                 for leg in self.leg_group_1:
-                    serial.set_leg_position(leg, -stride_length, distance_from_body, ground_height)
+                    serial.set_leg_position(leg, walk_vector_end.x, walk_vector_end.y, ground_height)
                 serial.send_commands()
                 sleep(sleep_time2)
 
                 distance_walked += stride_length
             else:
                 for leg in self.leg_group_2:
-                    serial.set_leg_position(leg, 0, distance_from_body, feet_up_height)
+                    serial.set_leg_position(leg, walk_vector_pivot.x, walk_vector_pivot.y, feet_up_height)
 
                 for leg in self.leg_group_1:
-                    serial.set_leg_position(leg, stride_length, distance_from_body, ground_height)
+                    serial.set_leg_position(leg, walk_vector_start.x, walk_vector_start.y, ground_height)
                 serial.send_commands()
                 sleep(sleep_time)
 
                 for leg in self.leg_group_2:
-                    serial.set_leg_position(leg, -stride_length, distance_from_body, ground_height)
+                    serial.set_leg_position(leg, walk_vector_end.x, walk_vector_end.y, ground_height)
                 serial.send_commands()
                 sleep(sleep_time2)
 
