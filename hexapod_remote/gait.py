@@ -27,6 +27,9 @@ class TripodGait(Gait):
     def __init__(self, serial: Serial) -> None:
         super().__init__(serial)
 
+        self.lhs_legs = [0, 1, 2]
+        self.rhs_legs = [3, 4, 5]
+
         self.leg_group_1 = [0, 2, 4]
         self.leg_group_2 = [1, 3, 5]
 
@@ -89,12 +92,22 @@ class TripodGait(Gait):
                     serial.set_leg_position(leg, walk_vector_pivot.x, walk_vector_pivot.y, feet_up_height)
 
                 for leg in self.leg_group_2:
-                    serial.set_leg_position(leg, walk_vector_start.x, walk_vector_start.y, ground_height)
+                    if leg in self.rhs_legs:
+                        x, y = walk_vector_start.as_tuple
+                    else:
+                        x, y = walk_vector_end.as_tuple
+
+                    serial.set_leg_position(leg, x, y, ground_height)
                 serial.send_commands()
                 sleep(sleep_time)
 
                 for leg in self.leg_group_1:
-                    serial.set_leg_position(leg, walk_vector_end.x, walk_vector_end.y, ground_height)
+                    if leg in self.lhs_legs:
+                        x, y = walk_vector_start.as_tuple
+                    else:
+                        x, y = walk_vector_end.as_tuple
+
+                    serial.set_leg_position(leg, x, y, ground_height)
                 serial.send_commands()
                 sleep(sleep_time2)
 
@@ -105,12 +118,22 @@ class TripodGait(Gait):
                     serial.set_leg_position(leg, walk_vector_pivot.x, walk_vector_pivot.y, feet_up_height)
 
                 for leg in self.leg_group_1:
-                    serial.set_leg_position(leg, walk_vector_start.x, walk_vector_start.y, ground_height)
+                    if leg in self.rhs_legs:
+                        x, y = walk_vector_start.as_tuple
+                    else:
+                        x, y = walk_vector_end.as_tuple
+
+                    serial.set_leg_position(leg, x, y, ground_height)
                 serial.send_commands()
                 sleep(sleep_time)
 
                 for leg in self.leg_group_2:
-                    serial.set_leg_position(leg, walk_vector_end.x, walk_vector_end.y, ground_height)
+                    if leg in self.lhs_legs:
+                        x, y = walk_vector_start.as_tuple
+                    else:
+                        x, y = walk_vector_end.as_tuple
+
+                    serial.set_leg_position(leg, x, y, ground_height)
                 serial.send_commands()
                 sleep(sleep_time2)
 

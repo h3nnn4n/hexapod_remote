@@ -1,3 +1,4 @@
+import typing as t
 from math import atan2, cos, sin
 from random import uniform
 
@@ -46,6 +47,11 @@ class Vector:
     @property
     def norm(self) -> float:
         return (self.x**2 + self.y**2) ** 0.5
+
+    @property
+    def as_tuple(self) -> t.Tuple[float, float]:
+        return self.x, self.y
+
 
     def dist(self, other):
         return other.copy().__sub__(self).norm
