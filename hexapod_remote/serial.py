@@ -11,6 +11,9 @@ class Serial:
         self._auto_send = auto_send
         self._queue = []
 
+        self._print_errors = True
+        self._print_commands = False
+
     def disable_auto_send(self) -> None:
         self._auto_send = False
 
@@ -72,7 +75,9 @@ class Serial:
         self._send_command(actual_command)
 
     def _send_command(self, command: str) -> None:
-        print(command)
+        if self._print_commands:
+            print(command)
+
         self.write(command)
         self.wait_for_ok()
 
@@ -89,7 +94,7 @@ class Serial:
         while True:
             line = self.readline()
 
-            if "ERROR" in line:
+            if "ERROR" in line and self._print_errors:
                 print(line)
 
             if line == "OK":
