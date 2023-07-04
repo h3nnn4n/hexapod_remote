@@ -31,7 +31,6 @@ class TripodGait(Gait):
         """Walk towards a `direction` for `distance` mm."""
         # TODO: Rotate movement vectors based on `direction`
         # TODO: Calculate number of steps based on `distance`
-        # TODO: Properly initiate walking cycle
 
         serial = self.serial
 
