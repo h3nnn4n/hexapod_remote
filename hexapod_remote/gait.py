@@ -78,7 +78,7 @@ class TripodGait(Gait):
 
         while distance_walked < distance:
             logger.info(f"{steps_taken=}  {distance_walked=}  {distance_left=}  {distance=}")
-            if last_step_stride > 0 and distance_walked - distance < last_step_stride:
+            if last_step_stride > 0 and distance - distance_walked < last_step_stride:
                 logger.info("making last step with reduced stride")
                 stride_length = last_step_stride
 
