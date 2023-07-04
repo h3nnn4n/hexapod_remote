@@ -57,6 +57,7 @@ class TripodGait(Gait):
         last_step_stride = distance % stride_length
         distance_walked = 0.0
         steps_taken = 0
+        distance_left = distance
 
         n_steps = int(distance / stride_length)
 
@@ -76,7 +77,7 @@ class TripodGait(Gait):
         logger.info(f"{last_step_stride=} {n_steps=}")
 
         while distance_walked < distance:
-            logger.info(f"{steps_taken=}  {distance_walked=}  {distance=}")
+            logger.info(f"{steps_taken=}  {distance_walked=}  {distance_left=}  {distance=}")
             if last_step_stride > 0 and distance_walked - distance < last_step_stride:
                 logger.info("making last step with reduced stride")
                 stride_length = last_step_stride
@@ -96,6 +97,7 @@ class TripodGait(Gait):
                 sleep(sleep_time2)
 
                 distance_walked += stride_length
+                distance_left -= stride_length
             else:
                 for leg in self.leg_group_2:
                     serial.set_leg_position(leg, walk_vector_pivot.x, walk_vector_pivot.y, feet_up_height)
@@ -111,6 +113,7 @@ class TripodGait(Gait):
                 sleep(sleep_time2)
 
                 distance_walked += stride_length
+                distance_left -= stride_length
             steps_taken += 1
 
         self.stop_walking()
