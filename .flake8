@@ -1,5 +1,5 @@
 [flake8]
-extend-ignore = D100,D101,D102,D103,D107,I100,CNL100
+extend-ignore = D100,D101,D102,D103,D105,D107,I100,CNL100
 max-line-length = 144
 exclude =
   .git,
