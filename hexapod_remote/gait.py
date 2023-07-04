@@ -6,6 +6,7 @@ from .vector import Vector
 
 
 logger = logging.getLogger(__name__)
+logger.setLevel("INFO")
 
 
 class Gait:
@@ -51,6 +52,8 @@ class TripodGait(Gait):
         distance_walked = 0.0
         steps_taken = 0
 
+        n_steps = int(distance / stride_length)
+
         # convert from degrees to radians
         angle = direction * 3.1415952654 / 180.0
         walk_vector_pivot = Vector(0.0, distance_from_body)
@@ -63,10 +66,13 @@ class TripodGait(Gait):
         serial.send_commands()
 
         logger.info("starting")
+        logger.info(f"{direction=} {distance=}")
+        logger.info(f"{last_step_stride=} {n_steps=}")
 
         while distance_walked < distance:
-            logger.info(f"{steps_taken=}  {distance_walked=}  {distance=}  {last_step_stride=}")
+            logger.info(f"{steps_taken=}  {distance_walked=}  {distance=}")
             if last_step_stride > 0 and distance_walked - distance < last_step_stride:
+                logger.info("making last step with reduced stride")
                 stride_length = last_step_stride
 
             if steps_taken % 2 == 0:
