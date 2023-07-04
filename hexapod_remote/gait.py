@@ -51,7 +51,7 @@ class TripodGait(Gait):
         while True:
             # Part 1
             for leg in self.leg_group_1:
-                serial.set_leg_position(leg, -stride_length, distance_from_body, feet_up_height)
+                serial.set_leg_position(leg, 0, distance_from_body, feet_up_height)
 
             for leg in self.leg_group_2:
                 serial.set_leg_position(leg, stride_length, distance_from_body, ground_height)
@@ -67,7 +67,7 @@ class TripodGait(Gait):
 
             # Part 2
             for leg in self.leg_group_2:
-                serial.set_leg_position(leg, stride_length, distance_from_body, feet_up_height)
+                serial.set_leg_position(leg, 0, distance_from_body, feet_up_height)
 
             for leg in self.leg_group_1:
                 serial.set_leg_position(leg, stride_length, distance_from_body, ground_height)
