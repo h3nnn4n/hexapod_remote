@@ -1,10 +1,12 @@
 import logging
+import logging.config
 from time import sleep
 
 from .serial import Serial
 from .vector import Vector
 
 
+logging.config.fileConfig("logging.conf")
 logger = logging.getLogger(__name__)
 logger.setLevel("INFO")
 
