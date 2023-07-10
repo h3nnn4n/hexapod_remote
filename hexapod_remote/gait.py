@@ -36,7 +36,7 @@ class TripodGait(Gait):
         self.ground_height = -120.0
         self.feet_up_height = -75.0
         self.distance_from_body = 115.0
-        self.stride_length = 35.0
+        self.stride_length = 70.0
 
         self.walk_speed = 150.0
         self.sleep_time = 0.4
@@ -67,8 +67,8 @@ class TripodGait(Gait):
         # convert from degrees to radians
         angle = direction * 3.1415952654 / 180.0
         walk_vector_pivot = Vector(0.0, distance_from_body)
-        walk_vector_start = Vector().from_angle(angle, stride_length) + walk_vector_pivot
-        walk_vector_end = Vector().from_angle(angle, -stride_length) + walk_vector_pivot
+        walk_vector_start = Vector().from_angle(angle, stride_length * 0.5) + walk_vector_pivot
+        walk_vector_end = Vector().from_angle(angle, -stride_length * 0.5) + walk_vector_pivot
 
         serial.disable_auto_send()
         serial.set_legs_speed(self.walk_speed)
