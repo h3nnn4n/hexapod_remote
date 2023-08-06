@@ -9,7 +9,7 @@ class Serial:
     def __init__(self, auto_send: bool = True):
         self._port = serial.Serial(config.SERIAL_PORT, config.BAUD_RATE, timeout=config.SERIAL_TIMEOUT)
         self._auto_send = auto_send
-        self._queue = []
+        self._queue: list[str] = []
 
         self._print_errors = True
         self._print_commands = False
