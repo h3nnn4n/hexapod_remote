@@ -1,17 +1,25 @@
+import logging
+
 from .gait import Gait, TripodGait
 from .leg import Leg
 from .serial import Serial
+
+
+logger = logging.getLogger(__name__)
 
 
 class Robot:
     legs: list[Leg]
 
     def __init__(self):
+        logger.debug("Initializing robot")
+
         self._serial = Serial()
         self._gait = TripodGait(self.serial)
 
         self.init_legs()
-        self.update()
+
+        logger.debug("Robot initialized")
 
     def init_legs(self) -> None:
         self.legs = []

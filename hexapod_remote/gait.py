@@ -1,18 +1,11 @@
 import logging
-import logging.config
 from time import sleep
-import yaml
 
 from .serial import Serial
 from .vector import Vector
 
 
-# FIXME: This is a mess
-with open("logging.yaml", 'r') as stream:
-    data_loaded = yaml.safe_load(stream)
-    logging.config.dictConfig(data_loaded)
-    logger = logging.getLogger(__name__)
-    logger.setLevel("INFO")
+logger = logging.getLogger(__name__)
 
 
 class Gait:

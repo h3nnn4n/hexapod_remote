@@ -1,6 +1,11 @@
+import logging
+
 from .enum import Enum, auto
 from .serial import Serial
 from .vector import Vector, Vector3d
+
+
+logger = logging.getLogger(__name__)
 
 
 class LegMode(Enum):
@@ -37,6 +42,8 @@ class Leg:
         self.tolerance = float("-inf")
 
         self.update_state()
+
+        logger.debug(f"Initialized leg {self.leg_id}")
 
     def update_state(self) -> None:
         raw_data = self.serial.send_read_command(f"READ_LEG_INFO {self.leg_id}")
