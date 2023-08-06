@@ -77,6 +77,30 @@ class Serial:
 
         self._send_command(actual_command)
 
+    def send_read_command(self, command: str) -> list[str]:
+        """Send a read command and return its output."""
+        data: list[str] = []
+
+        if self._print_commands:
+            print(command)
+
+        self.write(command)
+
+        while True:
+            line = self.readline()
+
+            if "ERROR" in line and self._print_errors:
+                print(line)
+
+            if line == "OK":
+                break
+
+            data.append(line)
+
+            sleep(0.1)
+
+        return data
+
     def _send_command(self, command: str) -> None:
         if self._print_commands:
             print(command)

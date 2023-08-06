@@ -1,11 +1,24 @@
 from .gait import Gait, TripodGait
+from .leg import Leg
 from .serial import Serial
 
 
 class Robot:
+    legs: list[Leg]
+
     def __init__(self):
         self._serial = Serial()
         self._gait = TripodGait(self.serial)
+
+        self.init_legs()
+
+    def init_legs(self) -> None:
+        self.legs = []
+
+        for leg_id in range(6):
+            leg = Leg(leg_id=leg_id, serial=self.serial)
+            break
+            self.legs.append(leg)
 
     def init(self) -> None:
         self.serial.wait_for_ping()

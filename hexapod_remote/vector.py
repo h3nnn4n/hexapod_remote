@@ -3,6 +3,19 @@ from math import atan2, cos, sin
 from random import uniform
 
 
+class Vector3d:
+    def __init__(self, x: float = 0.0, y: float = 0.0, z: float = 0.0):
+        self.x = x
+        self.y = y
+        self.z = z
+
+    def __str__(self):
+        return "%f %f %f" % (self.x, self.y, self.z)
+
+    def __repr__(self):
+        return "%f %f %f" % (self.x, self.y, self.z)
+
+
 class Vector:
     def __init__(self, x: float = 0.0, y: float = 0.0):
         self.x = x
@@ -51,7 +64,6 @@ class Vector:
     @property
     def as_tuple(self) -> t.Tuple[float, float]:
         return self.x, self.y
-
 
     def dist(self, other):
         return other.copy().__sub__(self).norm
