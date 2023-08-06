@@ -97,8 +97,6 @@ class Serial:
 
             data.append(line)
 
-            sleep(0.1)
-
         return data
 
     def _send_command(self, command: str) -> None:
