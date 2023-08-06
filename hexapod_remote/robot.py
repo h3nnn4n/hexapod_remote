@@ -11,18 +11,22 @@ class Robot:
         self._gait = TripodGait(self.serial)
 
         self.init_legs()
+        self.update()
 
     def init_legs(self) -> None:
         self.legs = []
 
         for leg_id in range(6):
             leg = Leg(leg_id=leg_id, serial=self.serial)
-            break
             self.legs.append(leg)
 
     def init(self) -> None:
         self.serial.wait_for_ping()
         self.serial.enable_servos()
+
+    def update(self) -> None:
+        for leg in self.legs:
+            leg.update_state()
 
     def walk(self, direction: float, distance: float) -> None:
         self.gait.walk(direction, distance)
