@@ -64,10 +64,13 @@ class Serial:
 
         self.send_command(f"SET_LEG_POSITION {leg_index} {x} {y} {z}")
 
-    def send_command(self, command: str) -> None:
+    def send_command(self, command: str, immediate: bool = False) -> None:
         actual_command, _, comments = command.partition("#")
         if not actual_command:
             return
+
+        if immediate:
+            return self._send_command(actual_command)
 
         if not self._auto_send:
             return self._queue.append(actual_command)
