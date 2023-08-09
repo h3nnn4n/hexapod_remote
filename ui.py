@@ -50,7 +50,7 @@ class Ui(QtWidgets.QMainWindow):
         self.robot.legs[0].move_to(x, y, z)
 
     def refresh(self):
-        self.robot.update()
+        self.robot.legs[0].update_state()
 
         leg1_position_label = self.findChild(QtWidgets.QLabel, "leg1_position_label")
         leg1_target_position_label = self.findChild(QtWidgets.QLabel, "leg1_target_position_label")
