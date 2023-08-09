@@ -12,7 +12,7 @@ class Serial:
         self._queue: list[str] = []
 
         self._print_errors = True
-        self._print_commands = False
+        self._print_commands = True
 
     def disable_auto_send(self) -> None:
         self._auto_send = False
@@ -96,6 +96,7 @@ class Serial:
                 break
 
             data.append(line)
+            print(line)
 
         return data
 
