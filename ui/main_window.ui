@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>840</width>
     <height>544</height>
    </rect>
   </property>
@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QFrame" name="frame">
+   <widget class="QFrame" name="frame_leg_status">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -45,10 +45,15 @@
       <property name="geometry">
        <rect>
         <x>120</x>
-        <y>30</y>
+        <y>40</y>
         <width>261</width>
         <height>16</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Monaco</family>
+       </font>
       </property>
       <property name="text">
        <string>leg position</string>
@@ -58,10 +63,15 @@
       <property name="geometry">
        <rect>
         <x>120</x>
-        <y>50</y>
+        <y>60</y>
         <width>261</width>
         <height>16</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Monaco</family>
+       </font>
       </property>
       <property name="text">
        <string>target position</string>
@@ -71,10 +81,15 @@
       <property name="geometry">
        <rect>
         <x>120</x>
-        <y>110</y>
+        <y>120</y>
         <width>211</width>
         <height>16</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Monaco</family>
+       </font>
       </property>
       <property name="text">
        <string>error</string>
@@ -97,7 +112,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>50</y>
+        <y>60</y>
         <width>101</width>
         <height>16</height>
        </rect>
@@ -113,7 +128,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>30</y>
+        <y>40</y>
         <width>101</width>
         <height>16</height>
        </rect>
@@ -129,7 +144,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>110</y>
+        <y>120</y>
         <width>101</width>
         <height>16</height>
        </rect>
@@ -145,7 +160,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>130</y>
+        <y>140</y>
         <width>101</width>
         <height>16</height>
        </rect>
@@ -161,10 +176,15 @@
       <property name="geometry">
        <rect>
         <x>120</x>
-        <y>130</y>
+        <y>140</y>
         <width>211</width>
         <height>16</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Monaco</family>
+       </font>
       </property>
       <property name="text">
        <string>tolerance</string>
@@ -174,7 +194,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>150</y>
+        <y>160</y>
         <width>101</width>
         <height>16</height>
        </rect>
@@ -190,10 +210,15 @@
       <property name="geometry">
        <rect>
         <x>120</x>
-        <y>150</y>
+        <y>160</y>
         <width>211</width>
         <height>16</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Monaco</family>
+       </font>
       </property>
       <property name="text">
        <string>speed</string>
@@ -203,7 +228,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>170</y>
+        <y>180</y>
         <width>101</width>
         <height>16</height>
        </rect>
@@ -219,10 +244,15 @@
       <property name="geometry">
        <rect>
         <x>120</x>
-        <y>170</y>
+        <y>180</y>
         <width>211</width>
         <height>16</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Monaco</family>
+       </font>
       </property>
       <property name="text">
        <string>mode</string>
@@ -232,7 +262,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>70</y>
+        <y>80</y>
         <width>101</width>
         <height>16</height>
        </rect>
@@ -248,10 +278,15 @@
       <property name="geometry">
        <rect>
         <x>120</x>
-        <y>90</y>
+        <y>100</y>
         <width>261</width>
         <height>16</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Monaco</family>
+       </font>
       </property>
       <property name="text">
        <string>angles</string>
@@ -261,7 +296,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>90</y>
+        <y>100</y>
         <width>101</width>
         <height>16</height>
        </rect>
@@ -277,13 +312,52 @@
       <property name="geometry">
        <rect>
         <x>120</x>
-        <y>70</y>
+        <y>80</y>
         <width>261</width>
         <height>16</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Monaco</family>
+       </font>
+      </property>
       <property name="text">
        <string>final position</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="leg1_position_label_4">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>101</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>id:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="leg1_id_label">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>20</y>
+        <width>261</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Monaco</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>leg id</string>
       </property>
      </widget>
     </widget>
@@ -301,12 +375,12 @@
      <string>Quit</string>
     </property>
    </widget>
-   <widget class="QFrame" name="frame_2">
+   <widget class="QFrame" name="frame_commands">
     <property name="geometry">
      <rect>
       <x>430</x>
       <y>30</y>
-      <width>361</width>
+      <width>401</width>
       <height>361</height>
      </rect>
     </property>
@@ -321,7 +395,7 @@
       <rect>
        <x>10</x>
        <y>10</y>
-       <width>341</width>
+       <width>381</width>
        <height>341</height>
       </rect>
      </property>
@@ -480,7 +554,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>10</string>
+       <string>100</string>
       </property>
      </widget>
      <widget class="Line" name="line">
@@ -496,6 +570,32 @@
        <enum>Qt::Horizontal</enum>
       </property>
      </widget>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>30</y>
+        <width>71</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>leg_id:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBox_command_leg_id">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>30</y>
+        <width>104</width>
+        <height>26</height>
+       </rect>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>
@@ -504,7 +604,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>840</width>
      <height>22</height>
     </rect>
    </property>

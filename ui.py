@@ -39,6 +39,11 @@ class Ui(QtWidgets.QMainWindow):
         assert pushButton_leg1_constant_speed is not None
         pushButton_leg1_constant_speed.clicked.connect(self.set_constant_speed_mode)
 
+        comboBox_command_leg_id = self.findChild(QtWidgets.QComboBox, "comboBox_command_leg_id")
+        assert comboBox_command_leg_id is not None
+        comboBox_command_leg_id.addItem("all")
+        comboBox_command_leg_id.addItems([str(i + 1) for i in range(6)])
+
         self.refresh()
 
     def set_instantaneous_mode(self):
@@ -59,18 +64,29 @@ class Ui(QtWidgets.QMainWindow):
             lineEdit_leg1_x = self.findChild(QtWidgets.QLineEdit, "lineEdit_leg1_x")
             lineEdit_leg1_y = self.findChild(QtWidgets.QLineEdit, "lineEdit_leg1_y")
             lineEdit_leg1_z = self.findChild(QtWidgets.QLineEdit, "lineEdit_leg1_z")
+            comboBox_command_leg_id = self.findChild(QtWidgets.QComboBox, "comboBox_command_leg_id")
 
             assert lineEdit_leg1_x is not None
             assert lineEdit_leg1_y is not None
             assert lineEdit_leg1_z is not None
+            assert comboBox_command_leg_id is not None
 
             x = float(lineEdit_leg1_x.text())
             y = float(lineEdit_leg1_y.text())
             z = float(lineEdit_leg1_z.text())
+            leg_id = comboBox_command_leg_id.currentText()
 
-            self.robot.legs[1].move_to(x, y, z)
+            if leg_id == "all":
+                self.robot.serial.disable_auto_send()
+                for leg in self.robot.legs:
+                    leg.move_to(x, y, z)
+                self.robot.serial.send_commands()
+                self.robot.serial.enable_auto_send()
 
-            self.refresh()
+                self.refresh()
+            else:
+                self.robot.legs[int(leg_id)].move_to(x, y, z)
+                self.refresh()
         except Exception as e:
             print(f"failed to move leg with error {e}")
 
@@ -91,6 +107,7 @@ def _refresh_ui(ui, robot, loop=False):
         try:
             robot.legs[1].update_state()
 
+            leg1_id_label = ui.findChild(QtWidgets.QLabel, "leg1_id_label")
             leg1_position_label = ui.findChild(QtWidgets.QLabel, "leg1_position_label")
             leg1_target_position_label = ui.findChild(QtWidgets.QLabel, "leg1_target_position_label")
             leg1_final_position_label = ui.findChild(QtWidgets.QLabel, "leg1_final_position_label")
@@ -100,6 +117,7 @@ def _refresh_ui(ui, robot, loop=False):
             leg1_speed_label = ui.findChild(QtWidgets.QLabel, "leg1_speed_label")
             leg1_mode_label = ui.findChild(QtWidgets.QLabel, "leg1_mode_label")
 
+            assert leg1_id_label is not None
             assert leg1_position_label is not None
             assert leg1_target_position_label is not None
             assert leg1_final_position_label is not None
@@ -109,6 +127,7 @@ def _refresh_ui(ui, robot, loop=False):
             assert leg1_speed_label is not None
             assert leg1_mode_label is not None
 
+            leg1_id_label.setText(str(robot.legs[1].leg_id))
             leg1_position_label.setText(str(robot.legs[1].current_position))
             leg1_target_position_label.setText(str(robot.legs[1].target_position))
             leg1_final_position_label.setText(str(robot.legs[1].final_position))
