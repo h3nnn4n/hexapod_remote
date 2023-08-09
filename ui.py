@@ -1,5 +1,6 @@
 import sys
 import threading
+from time import sleep
 
 from PyQt5 import QtWidgets, uic  # type:ignore
 
@@ -34,55 +35,74 @@ class Ui(QtWidgets.QMainWindow):
         # button = self.findChild(QtWidgets.QAction, "actionQuit")
         # button.clicked.connect(self.close_ui)  # type:ignore
 
+        thread = threading.Thread(target=_refresh_ui, args=(self, self.robot, True))
+        thread.start()
+
     def move_leg(self):
-        lineEdit_leg1_x = self.findChild(QtWidgets.QLineEdit, "lineEdit_leg1_x")
-        lineEdit_leg1_y = self.findChild(QtWidgets.QLineEdit, "lineEdit_leg1_y")
-        lineEdit_leg1_z = self.findChild(QtWidgets.QLineEdit, "lineEdit_leg1_z")
+        try:
+            lineEdit_leg1_x = self.findChild(QtWidgets.QLineEdit, "lineEdit_leg1_x")
+            lineEdit_leg1_y = self.findChild(QtWidgets.QLineEdit, "lineEdit_leg1_y")
+            lineEdit_leg1_z = self.findChild(QtWidgets.QLineEdit, "lineEdit_leg1_z")
 
-        assert lineEdit_leg1_x is not None
-        assert lineEdit_leg1_y is not None
-        assert lineEdit_leg1_z is not None
+            assert lineEdit_leg1_x is not None
+            assert lineEdit_leg1_y is not None
+            assert lineEdit_leg1_z is not None
 
-        x = float(lineEdit_leg1_x.text())
-        y = float(lineEdit_leg1_y.text())
-        z = float(lineEdit_leg1_z.text())
+            x = float(lineEdit_leg1_x.text())
+            y = float(lineEdit_leg1_y.text())
+            z = float(lineEdit_leg1_z.text())
 
-        self.robot.legs[0].move_to(x, y, z)
+            self.robot.legs[0].move_to(x, y, z)
+        except Exception as e:
+            print(f"failed to move leg with error {e}")
 
     def refresh(self):
-        self.robot.legs[0].update_state()
-
-        leg1_position_label = self.findChild(QtWidgets.QLabel, "leg1_position_label")
-        leg1_target_position_label = self.findChild(QtWidgets.QLabel, "leg1_target_position_label")
-        leg1_final_position_label = self.findChild(QtWidgets.QLabel, "leg1_final_position_label")
-        leg1_angles_label = self.findChild(QtWidgets.QLabel, "leg1_angles_label")
-        leg1_error_label = self.findChild(QtWidgets.QLabel, "leg1_error_label")
-        leg1_tolerance_label = self.findChild(QtWidgets.QLabel, "leg1_tolerance_label")
-        leg1_speed_label = self.findChild(QtWidgets.QLabel, "leg1_speed_label")
-        leg1_mode_label = self.findChild(QtWidgets.QLabel, "leg1_mode_label")
-
-        assert leg1_position_label is not None
-        assert leg1_target_position_label is not None
-        assert leg1_final_position_label is not None
-        assert leg1_angles_label is not None
-        assert leg1_error_label is not None
-        assert leg1_tolerance_label is not None
-        assert leg1_speed_label is not None
-        assert leg1_mode_label is not None
-
-        leg1_position_label.setText(str(self.robot.legs[0].current_position))
-        leg1_target_position_label.setText(str(self.robot.legs[0].target_position))
-        leg1_final_position_label.setText(str(self.robot.legs[0].final_position))
-        leg1_angles_label.setText(str(self.robot.legs[0].current_angles))
-        leg1_error_label.setText(str(self.robot.legs[0].error))
-        leg1_tolerance_label.setText(str(self.robot.legs[0].tolerance))
-        leg1_speed_label.setText(str(self.robot.legs[0].speed))
-        leg1_mode_label.setText(str(self.robot.legs[0].mode))
+        thread = threading.Thread(target=_refresh_ui, args=(self, self.robot))
+        thread.start()
 
     def close_ui(self):
         self.app.exit(0)
-
         sys.exit()
+
+
+def _refresh_ui(ui, robot, loop=False):
+    if loop:
+        sleep(1)
+
+    while loop:
+        try:
+            robot.legs[0].update_state()
+
+            leg1_position_label = ui.findChild(QtWidgets.QLabel, "leg1_position_label")
+            leg1_target_position_label = ui.findChild(QtWidgets.QLabel, "leg1_target_position_label")
+            leg1_final_position_label = ui.findChild(QtWidgets.QLabel, "leg1_final_position_label")
+            leg1_angles_label = ui.findChild(QtWidgets.QLabel, "leg1_angles_label")
+            leg1_error_label = ui.findChild(QtWidgets.QLabel, "leg1_error_label")
+            leg1_tolerance_label = ui.findChild(QtWidgets.QLabel, "leg1_tolerance_label")
+            leg1_speed_label = ui.findChild(QtWidgets.QLabel, "leg1_speed_label")
+            leg1_mode_label = ui.findChild(QtWidgets.QLabel, "leg1_mode_label")
+
+            assert leg1_position_label is not None
+            assert leg1_target_position_label is not None
+            assert leg1_final_position_label is not None
+            assert leg1_angles_label is not None
+            assert leg1_error_label is not None
+            assert leg1_tolerance_label is not None
+            assert leg1_speed_label is not None
+            assert leg1_mode_label is not None
+
+            leg1_position_label.setText(str(robot.legs[0].current_position))
+            leg1_target_position_label.setText(str(robot.legs[0].target_position))
+            leg1_final_position_label.setText(str(robot.legs[0].final_position))
+            leg1_angles_label.setText(str(robot.legs[0].current_angles))
+            leg1_error_label.setText(str(robot.legs[0].error))
+            leg1_tolerance_label.setText(str(robot.legs[0].tolerance))
+            leg1_speed_label.setText(str(robot.legs[0].speed))
+            leg1_mode_label.setText(str(robot.legs[0].mode))
+
+            sleep(0.1)
+        except Exception:
+            pass
 
 
 def robot_thread(robot):
