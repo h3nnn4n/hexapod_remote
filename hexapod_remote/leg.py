@@ -2,7 +2,7 @@ import logging
 
 from .enum import Enum, auto
 from .serial import Serial
-from .vector import Vector, Vector3d
+from .vector import Vector3d
 
 
 logger = logging.getLogger(__name__)
@@ -16,10 +16,10 @@ class LegMode(Enum):
 
 class Leg:
     leg_id: int
-    current_position: Vector
-    target_position: Vector
-    final_position: Vector
-    current_angles: Vector
+    current_position: Vector3d
+    target_position: Vector3d
+    final_position: Vector3d
+    current_angles: Vector3d
     mode: LegMode
     error: float
     current_reach: float
@@ -31,10 +31,10 @@ class Leg:
 
         self.serial = serial
 
-        self.current_position = Vector()
-        self.target_position = Vector()
-        self.final_position = Vector()
-        self.current_angles = Vector()
+        self.current_position = Vector3d()
+        self.target_position = Vector3d()
+        self.final_position = Vector3d()
+        self.current_angles = Vector3d()
         self.mode = LegMode.UNKNOWN
         self.error = float("-inf")
         self.current_reach = float("-inf")
