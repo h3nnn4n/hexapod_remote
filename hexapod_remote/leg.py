@@ -46,6 +46,7 @@ class Leg:
         logger.debug(f"Initialized leg {self.leg_id}")
 
     def update_state(self) -> None:
+        logger.debug(f"Updating leg {self.leg_id}")
         raw_data = self.serial.send_read_command(f"READ_LEG_INFO {self.leg_id}")
 
         for line in raw_data:
