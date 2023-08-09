@@ -35,8 +35,7 @@ class Ui(QtWidgets.QMainWindow):
         # button = self.findChild(QtWidgets.QAction, "actionQuit")
         # button.clicked.connect(self.close_ui)  # type:ignore
 
-        thread = threading.Thread(target=_refresh_ui, args=(self, self.robot, True))
-        thread.start()
+        self.refresh()
 
     def move_leg(self):
         try:
@@ -53,6 +52,8 @@ class Ui(QtWidgets.QMainWindow):
             z = float(lineEdit_leg1_z.text())
 
             self.robot.legs[0].move_to(x, y, z)
+
+            self.refresh()
         except Exception as e:
             print(f"failed to move leg with error {e}")
 
@@ -69,7 +70,7 @@ def _refresh_ui(ui, robot, loop=False):
     if loop:
         sleep(1)
 
-    while loop:
+    while True:
         try:
             robot.legs[0].update_state()
 
@@ -101,23 +102,22 @@ def _refresh_ui(ui, robot, loop=False):
             leg1_mode_label.setText(str(robot.legs[0].mode))
 
             sleep(0.1)
-        except Exception:
-            pass
+        except Exception as e:
+            print(f"failed to refresh ui with error {e}")
+
+        if not loop:
+            break
 
 
 def robot_thread(robot):
     robot.init()
 
-    while True:
-        pass
-
 
 def main() -> None:
     robot = Robot()
 
-    threads = [threading.Thread(target=robot_thread, args=(robot,))]
-    for t in threads:
-        t.start()
+    thread = threading.Thread(target=robot_thread, args=(robot,))
+    thread.start()
 
     app = QtWidgets.QApplication(sys.argv)
     window = Ui(app=app, robot=robot)

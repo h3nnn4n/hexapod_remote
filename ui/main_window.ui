@@ -379,6 +379,9 @@
         <height>21</height>
        </rect>
       </property>
+      <property name="text">
+       <string>50</string>
+      </property>
      </widget>
      <widget class="QLineEdit" name="lineEdit_leg1_y">
       <property name="geometry">
@@ -389,6 +392,9 @@
         <height>21</height>
        </rect>
       </property>
+      <property name="text">
+       <string>150</string>
+      </property>
      </widget>
      <widget class="QLineEdit" name="lineEdit_leg1_z">
       <property name="geometry">
@@ -398,6 +404,9 @@
         <width>113</width>
         <height>21</height>
        </rect>
+      </property>
+      <property name="text">
+       <string>-50</string>
       </property>
      </widget>
      <widget class="QLabel" name="label">
