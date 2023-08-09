@@ -35,15 +35,30 @@ class Ui(QtWidgets.QMainWindow):
 
         leg1_position_label = self.findChild(QtWidgets.QLabel, "leg1_position_label")
         leg1_target_position_label = self.findChild(QtWidgets.QLabel, "leg1_target_position_label")
+        leg1_final_position_label = self.findChild(QtWidgets.QLabel, "leg1_final_position_label")
+        leg1_angles_label = self.findChild(QtWidgets.QLabel, "leg1_angles_label")
         leg1_error_label = self.findChild(QtWidgets.QLabel, "leg1_error_label")
+        leg1_tolerance_label = self.findChild(QtWidgets.QLabel, "leg1_tolerance_label")
+        leg1_speed_label = self.findChild(QtWidgets.QLabel, "leg1_speed_label")
+        leg1_mode_label = self.findChild(QtWidgets.QLabel, "leg1_mode_label")
 
         assert leg1_position_label is not None
         assert leg1_target_position_label is not None
+        assert leg1_final_position_label is not None
+        assert leg1_angles_label is not None
         assert leg1_error_label is not None
+        assert leg1_tolerance_label is not None
+        assert leg1_speed_label is not None
+        assert leg1_mode_label is not None
 
         leg1_position_label.setText(str(self.robot.legs[0].current_position))
         leg1_target_position_label.setText(str(self.robot.legs[0].target_position))
+        leg1_final_position_label.setText(str(self.robot.legs[0].final_position))
+        leg1_angles_label.setText(str(self.robot.legs[0].current_angles))
         leg1_error_label.setText(str(self.robot.legs[0].error))
+        leg1_tolerance_label.setText(str(self.robot.legs[0].tolerance))
+        leg1_speed_label.setText(str(self.robot.legs[0].speed))
+        leg1_mode_label.setText(str(self.robot.legs[0].mode))
 
     def close_ui(self):
         self.app.exit(0)
