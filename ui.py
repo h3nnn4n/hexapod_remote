@@ -24,11 +24,30 @@ class Ui(QtWidgets.QMainWindow):
         button = self.findChild(QtWidgets.QPushButton, "pushButton_Refresh")
         button.clicked.connect(self.refresh)  # type:ignore
 
+        pushButton_leg1_move = self.findChild(QtWidgets.QPushButton, "pushButton_leg1_move")
+        assert pushButton_leg1_move is not None
+        pushButton_leg1_move.clicked.connect(self.move_leg)
+
         # button = self.findChild(QtWidgets.QAction, "actionExit")
         # button.clicked.connect(self.close_ui)  # type:ignore
 
         # button = self.findChild(QtWidgets.QAction, "actionQuit")
         # button.clicked.connect(self.close_ui)  # type:ignore
+
+    def move_leg(self):
+        lineEdit_leg1_x = self.findChild(QtWidgets.QLineEdit, "lineEdit_leg1_x")
+        lineEdit_leg1_y = self.findChild(QtWidgets.QLineEdit, "lineEdit_leg1_y")
+        lineEdit_leg1_z = self.findChild(QtWidgets.QLineEdit, "lineEdit_leg1_z")
+
+        assert lineEdit_leg1_x is not None
+        assert lineEdit_leg1_y is not None
+        assert lineEdit_leg1_z is not None
+
+        x = float(lineEdit_leg1_x.text())
+        y = float(lineEdit_leg1_y.text())
+        z = float(lineEdit_leg1_z.text())
+
+        self.robot.legs[0].move_to(x, y, z)
 
     def refresh(self):
         self.robot.update()

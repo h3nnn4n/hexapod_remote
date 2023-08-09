@@ -90,3 +90,6 @@ class Leg:
                         continue
 
                     print(f"got unknown field={field} with data={data}")
+
+    def move_to(self, x: float, y: float, z: float) -> None:
+        self.serial.send_command(f"SET_LEG_POSITION {self.leg_id} {x} {y} {z}")

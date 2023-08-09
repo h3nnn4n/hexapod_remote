@@ -19,7 +19,7 @@
      <rect>
       <x>10</x>
       <y>30</y>
-      <width>361</width>
+      <width>411</width>
       <height>361</height>
      </rect>
     </property>
@@ -34,19 +34,19 @@
       <rect>
        <x>10</x>
        <y>10</y>
-       <width>341</width>
+       <width>391</width>
        <height>341</height>
       </rect>
      </property>
      <property name="title">
-      <string>Leg 1 or something</string>
+      <string>Leg 1</string>
      </property>
      <widget class="QLabel" name="leg1_position_label">
       <property name="geometry">
        <rect>
         <x>120</x>
         <y>30</y>
-        <width>211</width>
+        <width>261</width>
         <height>16</height>
        </rect>
       </property>
@@ -59,7 +59,7 @@
        <rect>
         <x>120</x>
         <y>50</y>
-        <width>211</width>
+        <width>261</width>
         <height>16</height>
        </rect>
       </property>
@@ -278,7 +278,7 @@
        <rect>
         <x>120</x>
         <y>90</y>
-        <width>211</width>
+        <width>261</width>
         <height>16</height>
        </rect>
       </property>
@@ -307,7 +307,7 @@
        <rect>
         <x>120</x>
         <y>70</y>
-        <width>211</width>
+        <width>261</width>
         <height>16</height>
        </rect>
       </property>
@@ -329,6 +329,126 @@
     <property name="text">
      <string>Quit</string>
     </property>
+   </widget>
+   <widget class="QFrame" name="frame_2">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>30</y>
+      <width>361</width>
+      <height>361</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>341</width>
+       <height>341</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Commands</string>
+     </property>
+     <widget class="QPushButton" name="pushButton_leg1_move">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>120</y>
+        <width>113</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Move</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_leg1_x">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>30</y>
+        <width>113</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_leg1_y">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>60</y>
+        <width>113</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_leg1_z">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>90</y>
+        <width>113</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>21</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>x:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>60</y>
+        <width>21</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>y:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>90</y>
+        <width>21</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>z:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
