@@ -215,35 +215,6 @@
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
      </widget>
-     <widget class="QLabel" name="leg1_speed_label_2">
-      <property name="geometry">
-       <rect>
-        <x>120</x>
-        <y>190</y>
-        <width>211</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>speed</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="leg1_error_label_6">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>190</y>
-        <width>101</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>speed:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
      <widget class="QLabel" name="leg1_mode_label">
       <property name="geometry">
        <rect>
@@ -360,7 +331,7 @@
      <widget class="QPushButton" name="pushButton_leg1_move">
       <property name="geometry">
        <rect>
-        <x>40</x>
+        <x>60</x>
         <y>120</y>
         <width>113</width>
         <height>32</height>
@@ -373,7 +344,7 @@
      <widget class="QLineEdit" name="lineEdit_leg1_x">
       <property name="geometry">
        <rect>
-        <x>40</x>
+        <x>60</x>
         <y>30</y>
         <width>113</width>
         <height>21</height>
@@ -386,7 +357,7 @@
      <widget class="QLineEdit" name="lineEdit_leg1_y">
       <property name="geometry">
        <rect>
-        <x>40</x>
+        <x>60</x>
         <y>60</y>
         <width>113</width>
         <height>21</height>
@@ -399,7 +370,7 @@
      <widget class="QLineEdit" name="lineEdit_leg1_z">
       <property name="geometry">
        <rect>
-        <x>40</x>
+        <x>60</x>
         <y>90</y>
         <width>113</width>
         <height>21</height>
@@ -414,7 +385,7 @@
        <rect>
         <x>10</x>
         <y>30</y>
-        <width>21</width>
+        <width>41</width>
         <height>16</height>
        </rect>
       </property>
@@ -430,7 +401,7 @@
        <rect>
         <x>10</x>
         <y>60</y>
-        <width>21</width>
+        <width>41</width>
         <height>16</height>
        </rect>
       </property>
@@ -446,7 +417,7 @@
        <rect>
         <x>10</x>
         <y>90</y>
-        <width>21</width>
+        <width>41</width>
         <height>16</height>
        </rect>
       </property>
@@ -455,6 +426,74 @@
       </property>
       <property name="alignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_leg1_instantaneous">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>170</y>
+        <width>131</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Instantaneous</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_leg1_constant_speed">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>200</y>
+        <width>131</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Constant Speed</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>180</y>
+        <width>41</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>speed:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_leg1_speed">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>180</y>
+        <width>113</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>10</string>
+      </property>
+     </widget>
+     <widget class="Line" name="line">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>150</y>
+        <width>321</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
       </property>
      </widget>
     </widget>

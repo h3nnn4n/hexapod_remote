@@ -20,20 +20,37 @@ class Ui(QtWidgets.QMainWindow):
         uic.loadUi("ui/main_window.ui", self)
 
         button = self.findChild(QtWidgets.QPushButton, "quitPushButton")
-        button.clicked.connect(self.close_ui)  # type:ignore
+        assert button is not None
+        button.clicked.connect(self.close_ui)
 
         button = self.findChild(QtWidgets.QPushButton, "pushButton_Refresh")
-        button.clicked.connect(self.refresh)  # type:ignore
+        assert button is not None
+        button.clicked.connect(self.refresh)
 
         pushButton_leg1_move = self.findChild(QtWidgets.QPushButton, "pushButton_leg1_move")
         assert pushButton_leg1_move is not None
         pushButton_leg1_move.clicked.connect(self.move_leg)
 
-        # button = self.findChild(QtWidgets.QAction, "actionExit")
-        # button.clicked.connect(self.close_ui)  # type:ignore
+        pushButton_leg1_instantaneous = self.findChild(QtWidgets.QPushButton, "pushButton_leg1_instantaneous")
+        assert pushButton_leg1_instantaneous is not None
+        pushButton_leg1_instantaneous.clicked.connect(self.set_instantaneous_mode)
 
-        # button = self.findChild(QtWidgets.QAction, "actionQuit")
-        # button.clicked.connect(self.close_ui)  # type:ignore
+        pushButton_leg1_constant_speed = self.findChild(QtWidgets.QPushButton, "pushButton_leg1_constant_speed")
+        assert pushButton_leg1_constant_speed is not None
+        pushButton_leg1_constant_speed.clicked.connect(self.set_constant_speed_mode)
+
+        self.refresh()
+
+    def set_instantaneous_mode(self):
+        self.robot.serial.set_leg_mode("INSTANTANEOUS")
+        self.refresh()
+
+    def set_constant_speed_mode(self):
+        self.robot.serial.set_leg_mode("CONSTANT_SPEED")
+
+        lineEdit_leg1_speed = self.findChild(QtWidgets.QLineEdit, "lineEdit_leg1_speed")
+        assert lineEdit_leg1_speed is not None
+        self.robot.serial.set_legs_speed(float(lineEdit_leg1_speed.text()))
 
         self.refresh()
 
