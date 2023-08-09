@@ -83,6 +83,7 @@ class Leg:
                     z = float(z)
 
                     value = Vector3d(x, y, z)
+                    setattr(self, field, value)
 
                 case _:
                     if "READ_LEG_INFO" in field:
