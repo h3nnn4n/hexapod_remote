@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>544</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,8 +17,8 @@
    <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>40</y>
+      <x>10</x>
+      <y>30</y>
       <width>301</width>
       <height>301</height>
      </rect>
@@ -82,6 +82,19 @@
      </widget>
     </widget>
    </widget>
+   <widget class="QPushButton" name="quitPushButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>113</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Quit</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -97,8 +110,11 @@
      <string>File</string>
     </property>
     <addaction name="action"/>
-    <addaction name="separator"/>
     <addaction name="actionExit"/>
+    <addaction name="actionQuit"/>
+    <addaction name="separator"/>
+    <addaction name="actionFoo"/>
+    <addaction name="actionbar"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -106,8 +122,15 @@
     </property>
     <addaction name="actionhaha_you_wish"/>
    </widget>
+   <widget class="QMenu" name="menuSpam">
+    <property name="title">
+     <string>Spam</string>
+    </property>
+    <addaction name="actionEggs"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuHelp"/>
+   <addaction name="menuSpam"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionhaha_you_wish">
@@ -123,6 +146,26 @@
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionFoo">
+   <property name="text">
+    <string>Foo</string>
+   </property>
+  </action>
+  <action name="actionbar">
+   <property name="text">
+    <string>bar</string>
+   </property>
+  </action>
+  <action name="actionEggs">
+   <property name="text">
+    <string>Eggs</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Quit</string>
    </property>
   </action>
  </widget>
