@@ -666,6 +666,20 @@ files = [
 ]
 
 [[package]]
+name = "pyqt5-stubs"
+version = "5.15.6.0"
+description = "PEP561 stub files for the PyQt5 framework"
+optional = false
+python-versions = ">= 3.5"
+files = [
+    {file = "PyQt5-stubs-5.15.6.0.tar.gz", hash = "sha256:91270ac23ebf38a1dc04cd97aa852cd08af82dc839100e5395af1447e3e99707"},
+    {file = "PyQt5_stubs-5.15.6.0-py3-none-any.whl", hash = "sha256:7fb8177c72489a8911f021b7bd7c33f12c87f6dba92dcef3fdcdb5d9400f0f3f"},
+]
+
+[package.extras]
+dev = ["mypy (==0.930)", "pytest", "pytest-xvfb"]
+
+[[package]]
 name = "pyright"
 version = "1.1.320"
 description = "Command line wrapper for pyright"
@@ -863,4 +877,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "c8800a50a014100f6c4b6f35d381549c8eb53766ac7b3ab74cc719d2bcd5ba80"
+content-hash = "bfc33baf74a25daf790af05138a247ca98119990aaddcbd02461eea1061702ea"
