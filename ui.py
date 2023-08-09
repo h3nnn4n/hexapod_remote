@@ -51,7 +51,7 @@ class Ui(QtWidgets.QMainWindow):
             y = float(lineEdit_leg1_y.text())
             z = float(lineEdit_leg1_z.text())
 
-            self.robot.legs[0].move_to(x, y, z)
+            self.robot.legs[1].move_to(x, y, z)
 
             self.refresh()
         except Exception as e:
@@ -72,7 +72,7 @@ def _refresh_ui(ui, robot, loop=False):
 
     while True:
         try:
-            robot.legs[0].update_state()
+            robot.legs[1].update_state()
 
             leg1_position_label = ui.findChild(QtWidgets.QLabel, "leg1_position_label")
             leg1_target_position_label = ui.findChild(QtWidgets.QLabel, "leg1_target_position_label")
@@ -92,14 +92,14 @@ def _refresh_ui(ui, robot, loop=False):
             assert leg1_speed_label is not None
             assert leg1_mode_label is not None
 
-            leg1_position_label.setText(str(robot.legs[0].current_position))
-            leg1_target_position_label.setText(str(robot.legs[0].target_position))
-            leg1_final_position_label.setText(str(robot.legs[0].final_position))
-            leg1_angles_label.setText(str(robot.legs[0].current_angles))
-            leg1_error_label.setText(str(robot.legs[0].error))
-            leg1_tolerance_label.setText(str(robot.legs[0].tolerance))
-            leg1_speed_label.setText(str(robot.legs[0].speed))
-            leg1_mode_label.setText(str(robot.legs[0].mode))
+            leg1_position_label.setText(str(robot.legs[1].current_position))
+            leg1_target_position_label.setText(str(robot.legs[1].target_position))
+            leg1_final_position_label.setText(str(robot.legs[1].final_position))
+            leg1_angles_label.setText(str(robot.legs[1].current_angles))
+            leg1_error_label.setText(str(robot.legs[1].error))
+            leg1_tolerance_label.setText(str(robot.legs[1].tolerance))
+            leg1_speed_label.setText(str(robot.legs[1].speed))
+            leg1_mode_label.setText(str(robot.legs[1].mode))
 
             sleep(0.1)
         except Exception as e:
