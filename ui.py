@@ -2,9 +2,10 @@ import sys
 import threading
 from time import sleep
 
-from PyQt5 import QtWidgets, uic  # type:ignore
+from PyQt5 import QtCore, QtGui, QtWidgets, uic  # type:ignore
 
 from hexapod_remote.robot import Robot
+from hexapod_remote.vector import Vector3d
 
 
 class Ui(QtWidgets.QMainWindow):
@@ -43,6 +44,16 @@ class Ui(QtWidgets.QMainWindow):
         assert comboBox_command_leg_id is not None
         comboBox_command_leg_id.addItem("all")
         comboBox_command_leg_id.addItems([str(i + 1) for i in range(6)])
+
+        groupBox_leg_preview = self.findChild(QtWidgets.QGroupBox, "groupBox_leg_preview")
+        assert groupBox_leg_preview is not None
+        vbox = QtWidgets.QVBoxLayout()
+        vbox.addStretch(1)
+        groupBox_leg_preview.setLayout(vbox)
+
+        self.leg_preview_painter = PaintWidget(parent=groupBox_leg_preview, robot=self.robot)
+        self.leg_preview_painter.move(0, 0)
+        self.leg_preview_painter.resize(groupBox_leg_preview.width(), groupBox_leg_preview.height())
 
         self.refresh()
 
@@ -87,16 +98,59 @@ class Ui(QtWidgets.QMainWindow):
             else:
                 self.robot.legs[int(leg_id)].move_to(x, y, z)
                 self.refresh()
+
+            self.leg_preview_painter.update()
         except Exception as e:
             print(f"failed to move leg with error {e}")
 
     def refresh(self):
+        self.leg_preview_painter.update()
+
         thread = threading.Thread(target=_refresh_ui, args=(self, self.robot))
         thread.start()
 
     def close_ui(self):
         self.app.exit(0)
         sys.exit()
+
+
+class PaintWidget(QtWidgets.QWidget):
+    def __init__(self, robot: Robot, parent=None):
+        QtWidgets.QWidget.__init__(self, parent)
+        self.path = QtGui.QPainterPath()
+
+        self.robot = robot
+
+        pal = self.palette()
+        pal.setColor(QtGui.QPalette.Background, QtCore.Qt.gray)
+        self.setAutoFillBackground(True)
+        self.setPalette(pal)
+
+    def paintEvent(self, event):
+        qp = QtGui.QPainter(self)
+        size = self.size()
+
+        leg = self.robot.legs[1]
+
+        offset = Vector3d(size.width() / 2, size.height() / 2, 0)
+        origin = Vector3d(0, 0, 0)
+
+        position = offset + origin + leg.current_position.yzx
+        qp.setPen(QtCore.Qt.green)
+        qp.drawLine(*(offset + origin).ixy, *position.ixy)
+
+        position = offset + origin + leg.target_position.yzx
+        qp.setPen(QtCore.Qt.yellow)
+        qp.drawLine(*(offset + origin).ixy, *position.ixy)
+
+        position = offset + origin + leg.final_position.yzx
+        qp.setPen(QtCore.Qt.magenta)
+        qp.drawPoint(*position.ixy)
+        qp.drawLine(*(offset + origin).ixy, *position.ixy)
+
+        position = offset + origin
+        qp.setPen(QtCore.Qt.red)
+        qp.drawPoint(*position.ixy)
 
 
 def _refresh_ui(ui, robot, loop=False):
