@@ -11,6 +11,8 @@ packages = [{include = "hexapod_remote"}]
 python = "^3.10"
 python-decouple = "^3.8"
 pyserial = "^3.5"
+pyqt5 = "^5.15.9"
+pyqt5-stubs = "^5.15.6.0"
 
 
 [tool.poetry.group.dev.dependencies]

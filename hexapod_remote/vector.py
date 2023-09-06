@@ -15,6 +15,46 @@ class Vector3d:
     def __repr__(self):
         return "%f %f %f" % (self.x, self.y, self.z)
 
+    def __iter__(self):
+        yield self.x
+        yield self.y
+        yield self.z
+        return
+
+    def __add__(self, other: "Vector3d") -> "Vector3d":
+        return Vector3d(self.x + other.x, self.y + other.y, self.z + other.z)
+
+    def __sub__(self, other: "Vector3d") -> "Vector3d":
+        return Vector3d(self.x - other.x, self.y - other.y, self.z - other.z)
+
+    @property
+    def as_tuple(self) -> t.Tuple[float, float, float]:
+        return self.x, self.y, self.z
+
+    @property
+    def as_ituple(self) -> t.Tuple[int, int, int]:
+        return int(self.x), int(self.y), int(self.z)
+
+    @property
+    def xy(self) -> t.Tuple[float, float]:
+        return self.x, self.y
+
+    @property
+    def ixy(self) -> t.Tuple[int, int]:
+        return int(self.x), int(self.y)
+
+    @property
+    def yz(self) -> t.Tuple[float, float]:
+        return self.y, self.z
+
+    @property
+    def iyz(self) -> t.Tuple[int, int]:
+        return int(self.y), int(self.z)
+
+    @property
+    def yzx(self) -> "Vector3d":
+        return Vector3d(self.y, self.z, self.x)
+
 
 class Vector:
     def __init__(self, x: float = 0.0, y: float = 0.0):
@@ -47,6 +87,11 @@ class Vector:
 
     def __repr__(self):
         return "%f %f" % (self.x, self.y)
+
+    def __iter__(self):
+        yield self.x
+        yield self.y
+        return
 
     def normalize(self) -> "Vector":
         self.data = self.data / self.norm
